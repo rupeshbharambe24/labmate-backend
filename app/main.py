@@ -6,7 +6,7 @@ FastAPI service providing:
   - RBAC + audit trail endpoints
   - User progress tracking
 
-Deployed at: <your-render-url>.onrender.com
+Deployed on Render (see render.yaml).
 Used by: MeDo custom plugin in LabMate AI frontend
 
 Built for the Build with MeDo Hackathon 2026.
@@ -24,6 +24,13 @@ import httpx
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+
+try:  # load a local .env for development; Render injects env vars directly
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:  # pragma: no cover
+    pass
 
 # -----------------------------------------------------------------------------
 # Configuration
